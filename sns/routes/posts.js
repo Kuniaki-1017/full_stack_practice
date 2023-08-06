@@ -2,6 +2,8 @@
 const router = require("express").Router();
 //PostSchemaの読み込み
 const Post = require("../models/Post");
+//UserSchemaの読み込み
+const User = require("../models/User");
 
 //投稿を作成する
 router.post("/", async(req, res) => {
@@ -78,7 +80,7 @@ router.put("/:id/like", async(req, res) => {
                     //$push:配列にpush
                     $push: {
                         //likesに自分のidを入れる（push）
-                        likes: req.body.postId,
+                        likes: req.body.userId,
                     }
                 });
                 return res.status(200).json("投稿にいいねを押しました");
@@ -96,7 +98,33 @@ router.put("/:id/like", async(req, res) => {
         } catch(err) {
             return res.status(500).json(err);
                 }
+});
 
+//タイムラインの投稿を取得する
+//特定の投稿を取得するで/:idでgetしているためエンドポイントの階層を深くしないとうまく動作しないため注意
+router.get("/timeline/all", async (req, res) => {
+    try {
+        //自分自身の投稿を取得
+        const currentUser = await User.findById(req.body.userId);
+        const userPosts = await post.find({
+            //currentUser._id = currentUserの全ての投稿のidを配列で取得(全て = find)
+            userId: currentUser._id
+        });
+        //自分がフォローしている友達の投稿内容を全て取得する
+        //Promise.all → currentUserが非同期で処理されているためいつデータが戻ってくるかわからない。そのためPromise.allを使用する
+        const friendPosts = await Promise.all(
+            currentUser.followings.map((friendId) => {
+                //find({userId: friendId})　→自分がフォローしている人の投稿を全て取得できる
+                return Post.find({userId: friendId});
+            })
+        );
+        //concat メソッドを使うと配列に対して別の配列を結合した新しい配列を取得することができます
+        //
+        return res.status(200).json(userPosts.concat(...friendPosts));
+
+    } catch(err) {
+        return res.status(500).json(err);
+    }
 });
 
 
