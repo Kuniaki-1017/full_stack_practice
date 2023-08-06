@@ -54,3 +54,6 @@ const UserSchema = new mongoose.Schema(
     },
     {timeseries: true}
 );
+
+//UserSchemaをmodel関数でエクスポート（UserSchemaをUserという変数名でエクスポート）
+module.exports = mongoose.model('User', UserSchema);

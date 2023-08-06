@@ -3,12 +3,13 @@ const express = require("express");
 const app = express();
 
 //dotenvを読み込みコンフィグ関数を使用する(envファイルの変数が使用できるようになる)
-//第三者にパスワードを見れないようにする
+//第三者にパスワードを見れないようにし、gitignoreでgitリポジトリに上げないようにする。
 const dotenv = require("dotenv");
 dotenv.config();
 
 //データベース接続するためにmongoose読み込み
 const mongoose = require("mongoose");
+
 //データーベース接続（引数にURLを設定することで接続できる：URL取得は下記参考）※非同期
 //mongodbにアクセス→クラスターのconnectでConnect to your applicationを選択→Add your connection string into your application code内の
 //3.Add your connection string into your application codeに記載のURLをコピーしてmongoose.connectの引数に設定
