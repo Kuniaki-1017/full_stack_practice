@@ -52,7 +52,7 @@ const UserSchema = new mongoose.Schema(
             max: 50,
         },
     },
-    {timeseries: true}
+    { timestamps: true },
 );
 
 //UserSchemaをmodel関数でエクスポート（UserSchemaをUserという変数名でエクスポート）

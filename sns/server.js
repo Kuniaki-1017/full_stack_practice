@@ -36,6 +36,8 @@ const postsRoute = require("./routes/posts");
 //サーバの起動関数を使用
 app.listen(PORT, () => console.log("サーバーが起動しました"));
 
+//expressでjsonを使用するための関数を実行
+app.use(express.json());
 //ミドルウェアの設定：第一引数にエンドポイントの設定（ルーティング設定先では"/"になる）、第二引数にルーティング設定した変数（requireしたファイル）
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
@@ -43,12 +45,13 @@ app.use("/api/posts", postsRoute);
 
 
 
+
+
 //
 app.get("/", (req, res) => {
-    res.send("小沼です");
+    res.send("Hello Express");
 });
 
 // app.get("/users", (req, res) => {
 //     res.send("users");
 // });
-
