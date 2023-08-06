@@ -14,6 +14,7 @@ router.post("/register", async(req, res) => {
     //try catch文を記述
     try {
         //非同期でインスンス化（ユーザの新規作成）
+        //モデルからインスタンスを作成し、データを代入する
         const newUser = await new User({
             //POSTリクエストに含まれるbody要素のプロパティを格納
             username: req.body.username,
@@ -21,7 +22,7 @@ router.post("/register", async(req, res) => {
             password: req.body.password,
         });
 
-        //新規作成したユーザを保存
+        //新規作成したユーザデータを保存する
         const user = await newUser.save();
         //エラーがない場合下記ステータスとuser情報をレスポンスで返す
         return res.status(200).json(user);
