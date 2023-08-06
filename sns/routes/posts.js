@@ -106,7 +106,7 @@ router.get("/timeline/all", async (req, res) => {
     try {
         //自分自身の投稿を取得
         const currentUser = await User.findById(req.body.userId);
-        const userPosts = await post.find({
+        const userPosts = await Post.find({
             //currentUser._id = currentUserの全ての投稿のidを配列で取得(全て = find)
             userId: currentUser._id
         });
@@ -116,7 +116,7 @@ router.get("/timeline/all", async (req, res) => {
             currentUser.followings.map((friendId) => {
                 //find({userId: friendId})　→自分がフォローしている人の投稿を全て取得できる
                 return Post.find({userId: friendId});
-            })
+        })
         );
         //concat メソッドを使うと配列に対して別の配列を結合した新しい配列を取得することができます
         //
