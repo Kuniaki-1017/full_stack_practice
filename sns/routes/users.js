@@ -78,7 +78,10 @@ router.get("/:id", async(req, res) => {
             //ユーザ情報を見つけて取得する処理を実行する
             //どのユーザー情報を取得するか指定（で入力されたユーザーIDを指定）
             const user = await User.findById(req.params.id);
-            res.status(200).json(user);
+            //分割代入でpasswordとupdateAtの取り除いた情報を定義する。passwordとupdatedAt以外のプロパティは...otherにオブジェクトで代入される（otherオブジェクトが生成される）
+            //user._doc → 取得したuser情報の全てのプロパティを取得
+            const {password, updatedAt, ...other} = user._doc;
+            res.status(200).json(other);
              
         } catch(err) {
             return res.status(500).json(err);
