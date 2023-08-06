@@ -93,7 +93,7 @@ router.get("/:id", async(req, res) => {
 });
 
 //ユーザーのフォロー
-router.put("/:id/follow", async(riq, res) => {
+router.put("/:id/follow", async(req, res) => {
     //フォローしようとしているidが自分自身ではないか判定
     if(req.body.userId !== req.params.id){
         try {
@@ -103,7 +103,7 @@ router.put("/:id/follow", async(riq, res) => {
             const currentUser = await User.findById(req.body.userId);
             //既にフォローしているかどうか判別（今からフォローしようとしているuserが誰にフォローされているか確認。）
             //includes　→ req.body.uerIdが入っているか確認（フォロワーに自分がいなかったらフォローできる）
-            if(!user.followers.includes(req.body.uerId)){
+            if(!user.followers.includes(req.body.userId)){
                 await user.updateOne({
                     //$push:配列にpush
                     $push: {
