@@ -1,5 +1,7 @@
+//mongooseの読み込み
 const mongoose = require("mongoose");
 
+//userデータスキーマ（データの設定）
 const UserSchema = new mongoose.Schema(
     {
         username: {
