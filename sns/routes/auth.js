@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
     res.send("auth router");
 });
 
-//ユーザー登録21
+//ユーザー登録機能の実装
 router.post("/register", async(req, res) => {
     //try catch文を記述
     try {
@@ -31,6 +31,30 @@ router.post("/register", async(req, res) => {
         return res.status(500).json(err);
     }
 });
+
+
+//ログイン機能の実装
+router.post("/login", async(req, res) => {
+    try {
+        //User（mongoose.Schemaで作ったインスタンス）のfindOne関数を使用してユーザを指定した条件で探す処理をする：下記emailを持ったユーザー情報があるか確認
+        const user = await User.findOne({ email: req.body.email });
+        //emailが登録されていなかったらの処理
+        if(!user){
+            return res.status(404).send("ユーザーが見つかりませんでした。");
+        }
+        //送信されたパスワードが登録されたパスワードと一致しているか確認
+        const vailedPassword = req.body.password === user.password;
+        if(!vailedPassword){
+            return res.status(400).send("パスワードが違います");
+        }
+        //emailが存在し、パスワードが合っていたらuser情報を返す
+        return res.status(200).json(user);
+
+    } catch(err) {
+        return res.status(500).json(err);
+    }
+});
+
 
 //こちらのファイルをエクスポート
 module.exports = router;
