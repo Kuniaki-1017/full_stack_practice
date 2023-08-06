@@ -17,6 +17,26 @@ router.post("/", async(req, res) => {
      }
 });
 
+//投稿を更新する※userIdではなく投稿のidを指定
+router.put("/:id", async(req, res) => {
+    try {
+        //更新したい投稿のIDを投稿のidから取得
+        const post = await Post.findById(req.params.id);
+        //更新したい投稿のidと更新する人のidが一致しているか確認
+        if(post.userId === req.body.userId){
+            await post.updateOne({
+                //$setでreq.bodyのデータをset
+                $set: req.body,
+            });
+            return res.status(200).json("投稿編集に成功しました");
+        }else {
+            return res.status(403).json("あなたは他の人の投稿を編集できません");
+        }
+    } catch(err) {
+        return res.status(403).json(err);
+    }
+});
+
 
 
 //こちらのファイルをエクスポート
