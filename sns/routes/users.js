@@ -95,6 +95,7 @@ router.get("/:id", async(req, res) => {
 //ユーザーのフォロー
 router.put("/:id/follow", async(req, res) => {
     //フォローしようとしているidが自分自身ではないか判定
+    //req.body.userId=自分自身　req.params.id=外したいユーザー
     if(req.body.userId !== req.params.id){
         try {
             //データベースからリクエストパラメーターのIdと合致するドキュメントを取得（フォローする対象のID）※データベースと通信するためawait使用
@@ -135,6 +136,51 @@ router.put("/:id/follow", async(req, res) => {
 
 });
 
+
+//ユーザーのフォローを外す
+router.put("/:id/unfollow", async(req, res) => {
+    //フォローしようとしているidが自分自身ではないか判定
+    //req.body.userId=自分自身　req.params.id=外したいユーザー
+    if(req.body.userId !== req.params.id){
+        try {
+            //データベースからリクエストパラメーターのIdと合致するドキュメントを取得（フォローする対象のID）※データベースと通信するためawait使用
+            const user = await User.findById(req.params.id);
+            //データベースからリクエストbodyのIdと合致するドキュメントを取得（自分自身のID）※データベースと通信するためawait使用
+            const currentUser = await User.findById(req.body.userId);
+            //既にフォローしているかどうか判別（今からフォローを外そうとしているuserが誰にフォローされているか確認。）
+            //includes　→ req.body.uerIdが入っているか確認（フォロワーに自分がいなかったらフォローできる）
+            //フォローするとき時と違いuserに「id」がなければ外せない（外す必要がない）ので条件の「!」は消す
+            if(user.followers.includes(req.body.userId)){
+                await user.updateOne({
+                    //$pull:配列にpull
+                    $pull: {
+                        //followersの自分のidを取り除く（pull）
+                        followers: req.body.userId,
+                    }
+                });
+                //フォローを外したら自分自身のfollowingsのフォローしたidを取り除く（pull）
+                await currentUser.updateOne({
+                    //$pull:配列にpull
+                    $pull: {
+                        //followingsに自分のidを入れる（pull）
+                        followings: req.params.id,
+                    }
+                  
+                });
+                return res.status(200).json("フォロー解除しました！");
+            } else {
+                return res.status(403).json("このユーザーをフォロー解除できません");
+            }
+
+        } catch(err) {
+            return res.status(500).json(err);
+                }
+
+    }else {
+        return res.sratus(500).json("自分自身をフォロー解除できません。");
+    }
+
+});
 
 //こちらのファイルをエクスポート
 module.exports = router;
