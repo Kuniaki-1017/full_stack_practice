@@ -1,13 +1,23 @@
 //expressのルーティング関数を読み込み
 const router = require("express").Router();
+//PostSchemaの読み込み
+const Post = require("../models/Post");
 
-//ルーティング関数を使用してルーティング設定（server.jsで設定したエンドポイント=こちらのファイルではルートとなる）
-router.get("/", (req, res) => {
-    res.send("posts router");
+//投稿を作成する
+router.post("/", async(req, res) => {
+    //非同期でインスンス化（投稿の作成）
+    //モデルからインスタンスを作成し、データを代入する
+     const newpost = await new Post(req.body);
+     try {
+        //データベースにreq.bodyの内容を保存
+        const savedPost = await newpost.save();
+        return res.status(200).json(savedPost);
+     } catch(err) {
+        return res.status(500).json(err);
+     }
 });
-router.get("/profile", (req, res) => {
-    res.send("posts profile");
-});
+
+
 
 //こちらのファイルをエクスポート
 module.exports = router;
