@@ -18,26 +18,27 @@ export default function Shere() {
           />
         </div>
         <hr className="shareHr" />
-        <div className="shareButtoms"></div>
-        <div className="shareOptions">
-          <div className="shareOption">
-            <ImageIcon className="shareIcon" />
-            <span className="shareOptionText">写真</span>
+        <div className="shareButtoms">
+          <div className="shareOptions">
+            <div className="shareOption">
+              <ImageIcon className="shareIcon" htmlColor="blue" />
+              <span className="shareOptionText">写真</span>
+            </div>
+            <div className="shareOption">
+              <GifIcon className="shareIcon" htmlColor="hotpink" />
+              <span className="shareOptionText">GIF</span>
+            </div>
+            <div className="shareOption">
+              <FaceIcon className="shareIcon" htmlColor="green" />
+              <span className="shareOptionText">気持ち</span>
+            </div>
+            <div className="shareOption">
+              <AnalyticsIcon className="shareIcon" htmlColor="red" />
+              <span className="shareOptionText">投票</span>
+            </div>
           </div>
-          <div className="shareOption">
-            <GifIcon className="shareIcon" />
-            <span className="shareOptionText">GIF</span>
-          </div>
-          <div className="shareOption">
-            <FaceIcon className="shareIcon" />
-            <span className="shareOptionText">気持ち</span>
-          </div>
-          <div className="shareOption">
-            <AnalyticsIcon className="shareIcon" />
-            <span className="shareOptionText">投票</span>
-          </div>
+          <button className="shareButton">投稿</button>
         </div>
-        <button className="shareButton">投稿</button>
       </div>
     </div>
   );
