@@ -9,6 +9,9 @@ export default function Timeline() {
       <div className="timlineWrapper">
         <Shere />
         <Post />
+        <Post />
+        <Post />
+        <Post />
       </div>
     </div>
   );
