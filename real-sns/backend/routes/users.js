@@ -84,7 +84,7 @@ router.get("/:id", async(req, res) => {
             //分割代入でpasswordとupdateAtの取り除いた情報を定義する。passwordとupdatedAt以外のプロパティは...otherにオブジェクトで代入される（otherオブジェクトが生成される）
             //user._doc → 取得したuser情報の全てのプロパティを取得
             const {password, updatedAt, ...other} = user._doc;
-            res.status(200).json(other);
+            return res.status(200).json(other);
              
         } catch(err) {
             return res.status(500).json(err);

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Post.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import axios from "axios";
 //dummyDataからデータを取得{}の中にdummyData内で
 //export const hogeの「hoge」にあたる文字を記述することで特定のオブジェクトを取得できる
-import { Users } from "../../dummyData/dummyData";
+// import { Users } from "../../dummyData/dummyData";
 
 //Timeline.jsxにてmap関数でpropで渡されてきたPostsデータをpropsで取得
 export default function Post({ post }) {
@@ -21,6 +22,22 @@ export default function Post({ post }) {
     setIsLiked(!isLiked);
   };
 
+  const [user, setUser] = useState({});
+  useEffect(() => {
+    //useEfect内ではasync/awaitの使用方法が特殊でuseEfectのコールバックにasyncを使用できない
+    //そのためコールバック関数内で改めて関数を定義し、その関数でasyncを使用する
+    const fetchUser = async () => {
+      //get内のエンドポイントはproxyで設定した値以降のパスを入力
+      const response = await axios.get(`/users/${post.userId}`);
+      //responseのdataをオブジェクトを取得
+      setUser(response.data);
+      console.log(response);
+    };
+
+    //うまくいかないときは一度ローカルサーバを再起動
+    fetchUser();
+  }, []);
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -30,15 +47,12 @@ export default function Post({ post }) {
               src={
                 // 取得したUserデータの中からfilter関数（コールバックに引数を入れて処理内で条件を記述すると条件に合ったデータを取得できる）
                 //データ＋filter関数[フィルターされた結果で取り出したい配列（オブジェクト）番号指定]＋.キー名で取得できる
-                PUBLIC_FOLDER +
-                Users.filter((user) => user.id === post.id)[0].profilePicture
+                user.profilePicture
               }
               alt=""
               className="postProfileImg"
             />
-            <span className="postUserName">
-              {Users.filter((user) => user.id === post.id)[0].username}
-            </span>
+            <span className="postUserName">{user.username}</span>
             <span className="postDate">{post.date}</span>
           </div>
           <div className="postTopRight">

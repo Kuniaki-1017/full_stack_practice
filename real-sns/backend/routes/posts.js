@@ -102,10 +102,10 @@ router.put("/:id/like", async(req, res) => {
 
 //タイムラインの投稿を取得する
 //特定の投稿を取得するで/:idでgetしているためエンドポイントの階層を深くしないとうまく動作しないため注意
-router.get("/timeline/all", async (req, res) => {
+router.get("/timeline/:userId", async (req, res) => {
     try {
-        //自分自身の投稿を取得
-        const currentUser = await User.findById(req.body.userId);
+        //任意のユーザーの投稿を取得
+        const currentUser = await User.findById(req.params.userId);
         const userPosts = await Post.find({
             //currentUser._id = currentUserの全ての投稿のidを配列で取得(全て = find)
             userId: currentUser._id
