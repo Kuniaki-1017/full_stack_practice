@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Post.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 //dummyDataからデータを取得{}の中にdummyData内で
@@ -7,8 +7,19 @@ import { Users } from "../../dummyData/dummyData";
 
 //Timeline.jsxにてmap関数でpropで渡されてきたPostsデータをpropsで取得
 export default function Post({ post }) {
-  // const user = Users.filter((user) => user.id === 1);
-  // console.log(user[0].username);
+  //likeデータの状態関数
+  const [like, setLike] = useState(post.like);
+  //いいねが押されているか判別する状態関数
+  const [isLiked, setIsLiked] = useState(false);
+
+  //いいねが押された時のクリックイベント
+  const handleLike = () => {
+    //isLikedが押されていたらいいねを-1し、押されていなかったら+1する。（押してるか押してないかはisLikedに入ってる）
+    setLike(isLiked ? like - 1 : like + 1);
+    //いいね押されたらbool値を反転させる
+    setIsLiked(!isLiked);
+  };
+
   return (
     <div className="post">
       <div className="postWrapper">
@@ -38,9 +49,14 @@ export default function Post({ post }) {
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <img src="./assets/heart.png" className="likeImg" alt="" />
+            <img
+              onClick={() => handleLike()}
+              src="./assets/heart.png"
+              className="likeImg"
+              alt=""
+            />
             <span className="poastLilkeCounter">
-              {post.like}がいいねを押しました
+              {like}がいいねを押しました
             </span>
           </div>
           <div className="postBottomRight">
