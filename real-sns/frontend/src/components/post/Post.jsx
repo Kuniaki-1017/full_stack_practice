@@ -10,7 +10,7 @@ import axios from "axios";
 export default function Post({ post }) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   //likeデータの状態関数
-  const [like, setLike] = useState(post.like);
+  const [like, setLike] = useState(post.likes.length);
   //いいねが押されているか判別する状態関数
   const [isLiked, setIsLiked] = useState(false);
 

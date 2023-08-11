@@ -33,7 +33,7 @@ export default function Timeline() {
         {/* dummyData内のPostsデータをmap関数を使用し一つずつ（計5つ）POSTコンポーネントにpropsで渡す*/}
         {/* 上記の結果、Postコンポーネントが5回出力され、且つPostデータ内のデータが順番に出力される*/}
         {posts.map((post) => (
-          <Post post={post} key={post.id} />
+          <Post post={post} key={post._id} />
         ))}
       </div>
     </div>
