@@ -28,9 +28,9 @@ export default function Profile() {
             </div>
             <div className="profileInfo">
               <h4 className="profileInfoName">kuniaki</h4>
-              <spnan className="profileInfoDesc">
+              <span className="profileInfoDesc">
                 フロントエンドエンジニアをしております
-              </spnan>
+              </span>
             </div>
           </div>
           <div className="profileRgihtBottom">
