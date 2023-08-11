@@ -11,12 +11,12 @@ export default function Rightbar({ profile }) {
     return (
       <>
         <div className="eventConteiner">
-          <img src="./assets/star.png" alt="" className="starImg" />
+          <img src="/assets/star.png" alt="" className="starImg" />
           <span className="eventText">
             <b>フォロワー限定</b>イベント開催中!
           </span>
         </div>
-        <img src="./assets/ad.jpeg" alt="" className="eventImg" />
+        <img src="/assets/ad.jpeg" alt="" className="eventImg" />
         <h4 className="rightbarTitle">オンラインの友達</h4>
         <ul className="rightbarFriendList">
           {Users.map((user) => (
@@ -25,19 +25,19 @@ export default function Rightbar({ profile }) {
         </ul>
         <p className="promotionTitle">プロモーション広告</p>
         <img
-          src="./assets/promotion/promotion1.jpeg"
+          src="/assets/promotion/promotion1.jpeg"
           alt=""
           className="rightbarPromotionImg"
         />
         <p className="promotionName">ショッピング</p>
         <img
-          src="./assets/promotion/promotion2.jpeg"
+          src="/assets/promotion/promotion2.jpeg"
           alt=""
           className="rightbarPromotionImg"
         />
         <p className="promotionName">カーショップ</p>
         <img
-          src="./assets/promotion/promotion3.jpeg"
+          src="/assets/promotion/promotion3.jpeg"
           alt=""
           className="rightbarPromotionImg"
         />
@@ -61,7 +61,7 @@ export default function Rightbar({ profile }) {
             <div className="rightbarFollowing">
               <img
                 className="rightbarFollowingImg"
-                src="./assets/person/1.jpeg"
+                src="/assets/person/1.jpeg"
                 alt=""
               />
               <span className="rightbarFollowingName">kuniaki</span>
@@ -69,7 +69,7 @@ export default function Rightbar({ profile }) {
             <div className="rightbarFollowing">
               <img
                 className="rightbarFollowingImg"
-                src="./assets/person/2.jpeg"
+                src="/assets/person/2.jpeg"
                 alt=""
               />
               <span className="rightbarFollowingName">yamaki</span>
@@ -77,7 +77,7 @@ export default function Rightbar({ profile }) {
             <div className="rightbarFollowing">
               <img
                 className="rightbarFollowingImg"
-                src="./assets/person/3.jpeg"
+                src="/assets/person/3.jpeg"
                 alt=""
               />
               <span className="rightbarFollowingName">koga</span>
@@ -85,7 +85,7 @@ export default function Rightbar({ profile }) {
             <div className="rightbarFollowing">
               <img
                 className="rightbarFollowingImg"
-                src="./assets/person/4.jpeg"
+                src="/assets/person/4.jpeg"
                 alt=""
               />
               <span className="rightbarFollowingName">matukubo</span>
@@ -93,7 +93,7 @@ export default function Rightbar({ profile }) {
             <div className="rightbarFollowing">
               <img
                 className="rightbarFollowingImg"
-                src="./assets/person/5.jpeg"
+                src="/assets/person/5.jpeg"
                 alt=""
               />
               <span className="rightbarFollowingName">kikukawa</span>

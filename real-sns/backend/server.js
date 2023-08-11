@@ -26,7 +26,7 @@ mongoose.connect(process.env.MONGOURL)
 })
 
 //PORT番号の設定:基本的に任意の数字を設定できる
-const PORT = 3000;
+const PORT = 5000;
 
 //ルーティング設定したファイルの読み込み
 const userRoute = require("./routes/users");

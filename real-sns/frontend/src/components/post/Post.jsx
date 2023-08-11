@@ -51,7 +51,7 @@ export default function Post({ post }) {
           <div className="postBottomLeft">
             <img
               onClick={() => handleLike()}
-              src="./assets/heart.png"
+              src="/assets/heart.png"
               className="likeImg"
               alt=""
             />
