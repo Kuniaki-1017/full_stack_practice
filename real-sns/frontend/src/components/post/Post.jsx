@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./Post.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import axios from "axios";
+//現在の時間と投稿日時を参照していつ投稿されたか出力してくれるライブラリ
+import { format } from "timeago.js";
 //dummyDataからデータを取得{}の中にdummyData内で
 //export const hogeの「hoge」にあたる文字を記述することで特定のオブジェクトを取得できる
 // import { Users } from "../../dummyData/dummyData";
@@ -53,7 +55,8 @@ export default function Post({ post }) {
               className="postProfileImg"
             />
             <span className="postUserName">{user.username}</span>
-            <span className="postDate">{post.date}</span>
+            {/* timeagoライブラリのformat関数を使用していつ投稿されたのか表示 */}
+            <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
             <MoreVertIcon className="" />
