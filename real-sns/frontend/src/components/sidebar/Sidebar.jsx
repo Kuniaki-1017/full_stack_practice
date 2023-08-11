@@ -11,6 +11,7 @@ import CloseFriend from "../closefriend/CloseFriend";
 //dummyDataからデータを取得{}の中にdummyData内で
 //export const hogeの「hoge」にあたる文字を記述することで特定のオブジェクトを取得できる
 import { Users } from "../../dummyData/dummyData";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
@@ -19,7 +20,9 @@ export default function Sidebar() {
         <ul className="sidebarList">
           <li className="sidebarListItem">
             <HomeIcon className="sidebarIcon" />
-            <span className="saiberListItemText">ホーム</span>
+            <Link to="/" style={{ textDecoration: "none", color: "#333" }}>
+              <span className="saiberListItemText">ホーム</span>
+            </Link>
           </li>
           <li className="sidebarListItem">
             <SearchIcon className="sidebarIcon" />
@@ -39,7 +42,12 @@ export default function Sidebar() {
           </li>
           <li className="sidebarListItem">
             <PersonIcon className="sidebarIcon" />
-            <span className="saiberListItemText">プロフィール</span>
+            <Link
+              to="/profile/kuniaki"
+              style={{ textDecoration: "none", color: "#333" }}
+            >
+              <span className="saiberListItemText">プロフィール</span>
+            </Link>
           </li>
           <li className="sidebarListItem">
             <SettingsIcon className="sidebarIcon" />
