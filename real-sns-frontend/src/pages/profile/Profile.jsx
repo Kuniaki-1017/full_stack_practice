@@ -34,7 +34,9 @@ export default function Profile() {
           </div>
           <div className="profileRgihtBottom">
             <Timeline />
-            <Rightbar />
+            {/* Rightbarに「profile」をpropsで渡す */}
+            {/* trueを渡す場合は、=を省略してprops名だけを書くことが可能です。 */}
+            <Rightbar profile />
           </div>
         </div>
       </div>

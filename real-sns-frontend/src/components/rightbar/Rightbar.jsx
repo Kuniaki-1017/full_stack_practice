@@ -5,10 +5,11 @@ import "./Rightbar.css";
 import { Users } from "../../dummyData/dummyData";
 import Online from "../online/Online";
 
-export default function Rightbar() {
-  return (
-    <div className="rightbar">
-      <div className="rightWrapper">
+export default function Rightbar({ profile }) {
+  // HOMEコンポーネント用のRightbarコンポーネントを関数で用意
+  const HomeRightbar = () => {
+    return (
+      <>
         <div className="eventConteiner">
           <img src="./assets/star.png" alt="" className="starImg" />
           <span className="eventText">
@@ -41,6 +42,21 @@ export default function Rightbar() {
           className="rightbarPromotionImg"
         />
         <p className="promotionName">kuniaki株式会社</p>
+      </>
+    );
+  };
+
+  //Profileコンポーネント用のRightbarコンポーネントを関数で用意
+  const ProfileRightbar = () => {
+    return <>プロフィールのRightbarです</>;
+  };
+
+  return (
+    <div className="rightbar">
+      <div className="rightbarWrapper">
+        {/* 三項演算子でpropsで渡されてきた値を元に呼び出すコンポーネントの切り分けをする */}
+        {/* propsで渡されてきたprofileは「true」として渡ってきている */}
+        {profile ? <ProfileRightbar /> : <HomeRightbar />}
       </div>
     </div>
   );
