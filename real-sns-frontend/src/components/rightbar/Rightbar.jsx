@@ -11,15 +11,30 @@ export default function Rightbar() {
             <b>フォロワー限定</b>イベント開催中!
           </span>
         </div>
-        <img src="./assets/ad.jpeg" alt="" />
+        <img src="./assets/ad.jpeg" alt="" className="eventImg" />
         <h4 className="rightbarTitle">オンラインの友達</h4>
         <ul className="rightbarFriendList">
           <li className="rightbarFriend">
             <div className="rightbarProfileImgConteiner">
-              <img src="./assets/person/1.jpeg" alt="" className="" />
+              <img
+                src="./assets/person/1.jpeg"
+                alt=""
+                className="rightbarProfileImg"
+              />
               <span className="rightbarOnline"></span>
             </div>
             <span className="rightbarUsername">kuniaki</span>
+          </li>
+          <li className="rightbarFriend">
+            <div className="rightbarProfileImgConteiner">
+              <img
+                src="./assets/person/2.jpeg"
+                alt=""
+                className="rightbarProfileImg"
+              />
+              <span className="rightbarOnline"></span>
+            </div>
+            <span className="rightbarUsername">tanaka</span>
           </li>
         </ul>
       </div>
