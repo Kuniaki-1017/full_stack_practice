@@ -7,6 +7,10 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import PersonIcon from "@mui/icons-material/Person";
 import SettingsIcon from "@mui/icons-material/Settings";
+import CloseFriend from "../closefriend/CloseFriend";
+//dummyDataからデータを取得{}の中にdummyData内で
+//export const hogeの「hoge」にあたる文字を記述することで特定のオブジェクトを取得できる
+import { Users } from "../../dummyData/dummyData";
 
 export default function Sidebar() {
   return (
@@ -44,30 +48,9 @@ export default function Sidebar() {
         </ul>
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
-          <li className="sidebarFriend">
-            <img
-              src="/assets/person/2.jpeg"
-              alt=""
-              className="sidebarFriendImg"
-            />
-            <span className="sidbarFriendName">kuaniki</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/person/3.jpeg"
-              alt=""
-              className="sidebarFriendImg"
-            />
-            <span className="sidbarFriendName">tanaka</span>
-          </li>
-          <li className="sidebarFriend">
-            <img
-              src="/assets/person/4.jpeg"
-              alt=""
-              className="sidebarFriendImg"
-            />
-            <span className="sidbarFriendName">satou</span>
-          </li>
+          {Users.map((user) => (
+            <CloseFriend user={user} key={user.id} />
+          ))}
         </ul>
       </div>
     </div>
