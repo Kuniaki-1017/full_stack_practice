@@ -9,16 +9,16 @@ import axios from "axios";
 //export const hogeの「hoge」にあたる文字を記述することで特定のオブジェクトを取得できる
 // import { Posts } from "../../dummyData/dummyData";
 
-export default function Timeline() {
+export default function Timeline({ username }) {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     //useEfect内ではasync/awaitの使用方法が特殊でuseEfectのコールバックにasyncを使用できない
     //そのためコールバック関数内で改めて関数を定義し、その関数でasyncを使用する
     const fetchPosts = async () => {
       //get内のエンドポイントはproxyで設定した値以降のパスを入力
-      const response = await axios.get(
-        "/posts/timeline/64cf11379925232524853c9d"
-      );
+      const response = username
+        ? await axios.get(`/posts/profile/${username}`)
+        : await axios.get("/posts/timeline/64cf11379925232524853c9d");
       //responseのdataをオブジェクトを取得
       setPosts(response.data);
     };

@@ -127,6 +127,26 @@ router.get("/timeline/:userId", async (req, res) => {
     }
 });
 
+//プロフィール専用(自分のみの)タイムラインの投稿を取得する
+//特定の投稿を取得するで/:idでgetしているためエンドポイントの階層を深くしないとうまく動作しないため注意
+router.get("/profile/:username", async (req, res) => {
+    try {
+        //任意のユーザーの投稿を取得
+        //idで探すのではなくusername文字）で探すのでfindByIdでなくfideOne使用
+        const user = await User.findOne({username: req.params.username});
+        const posts = await Post.find({
+            //currentUser._id = currentUserの全ての投稿のidを配列で取得(全て = find)
+            userId: user._id
+        });
+        //concat メソッドを使うと配列に対して別の配列を結合した新しい配列を取得することができます
+        //
+        return res.status(200).json(posts);
+
+    } catch(err) {
+        return res.status(500).json(err);
+    }
+});
+
 
 
 
