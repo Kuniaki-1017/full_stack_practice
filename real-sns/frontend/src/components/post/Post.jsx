@@ -7,6 +7,7 @@ import { Users } from "../../dummyData/dummyData";
 
 //Timeline.jsxにてmap関数でpropで渡されてきたPostsデータをpropsで取得
 export default function Post({ post }) {
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   //likeデータの状態関数
   const [like, setLike] = useState(post.like);
   //いいねが押されているか判別する状態関数
@@ -29,6 +30,7 @@ export default function Post({ post }) {
               src={
                 // 取得したUserデータの中からfilter関数（コールバックに引数を入れて処理内で条件を記述すると条件に合ったデータを取得できる）
                 //データ＋filter関数[フィルターされた結果で取り出したい配列（オブジェクト）番号指定]＋.キー名で取得できる
+                PUBLIC_FOLDER +
                 Users.filter((user) => user.id === post.id)[0].profilePicture
               }
               alt=""
@@ -45,13 +47,13 @@ export default function Post({ post }) {
         </div>
         <div className="postCenter">
           <span className="postText">{post.desc}</span>
-          <img src={post.photo} className="postImg" alt="" />
+          <img src={PUBLIC_FOLDER + post.photo} className="postImg" alt="" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
             <img
               onClick={() => handleLike()}
-              src="/assets/heart.png"
+              src={PUBLIC_FOLDER + "/heart.png"}
               className="likeImg"
               alt=""
             />

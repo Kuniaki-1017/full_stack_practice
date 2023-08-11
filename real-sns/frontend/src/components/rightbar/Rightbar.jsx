@@ -48,6 +48,7 @@ export default function Rightbar({ profile }) {
 
   //Profileコンポーネント用のRightbarコンポーネントを関数で用意
   const ProfileRightbar = () => {
+    const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
     return (
       <>
         <h4 className="rightbarTitle">ユーザー情報</h4>
@@ -61,7 +62,7 @@ export default function Rightbar({ profile }) {
             <div className="rightbarFollowing">
               <img
                 className="rightbarFollowingImg"
-                src="/assets/person/1.jpeg"
+                src={PUBLIC_FOLDER + "/person/1.jpeg"}
                 alt=""
               />
               <span className="rightbarFollowingName">kuniaki</span>
@@ -69,7 +70,7 @@ export default function Rightbar({ profile }) {
             <div className="rightbarFollowing">
               <img
                 className="rightbarFollowingImg"
-                src="/assets/person/2.jpeg"
+                src={PUBLIC_FOLDER + "/person/2.jpeg"}
                 alt=""
               />
               <span className="rightbarFollowingName">yamaki</span>
@@ -77,7 +78,7 @@ export default function Rightbar({ profile }) {
             <div className="rightbarFollowing">
               <img
                 className="rightbarFollowingImg"
-                src="/assets/person/3.jpeg"
+                src={PUBLIC_FOLDER + "/person/3.jpeg"}
                 alt=""
               />
               <span className="rightbarFollowingName">koga</span>
@@ -85,7 +86,7 @@ export default function Rightbar({ profile }) {
             <div className="rightbarFollowing">
               <img
                 className="rightbarFollowingImg"
-                src="/assets/person/4.jpeg"
+                src={PUBLIC_FOLDER + "/person/4.jpeg"}
                 alt=""
               />
               <span className="rightbarFollowingName">matukubo</span>
@@ -93,7 +94,7 @@ export default function Rightbar({ profile }) {
             <div className="rightbarFollowing">
               <img
                 className="rightbarFollowingImg"
-                src="/assets/person/5.jpeg"
+                src={PUBLIC_FOLDER + "/person/5.jpeg"}
                 alt=""
               />
               <span className="rightbarFollowingName">kikukawa</span>
