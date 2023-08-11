@@ -1,5 +1,9 @@
 import React from "react";
 import "./Rightbar.css";
+//dummyDataからデータを取得{}の中にdummyData内で
+//export const hogeの「hoge」にあたる文字を記述することで特定のオブジェクトを取得できる
+import { Users } from "../../dummyData/dummyData";
+import Online from "../online/Online";
 
 export default function Rightbar() {
   return (
@@ -14,28 +18,9 @@ export default function Rightbar() {
         <img src="./assets/ad.jpeg" alt="" className="eventImg" />
         <h4 className="rightbarTitle">オンラインの友達</h4>
         <ul className="rightbarFriendList">
-          <li className="rightbarFriend">
-            <div className="rightbarProfileImgConteiner">
-              <img
-                src="./assets/person/1.jpeg"
-                alt=""
-                className="rightbarProfileImg"
-              />
-              <span className="rightbarOnline"></span>
-            </div>
-            <span className="rightbarUsername">kuniaki</span>
-          </li>
-          <li className="rightbarFriend">
-            <div className="rightbarProfileImgConteiner">
-              <img
-                src="./assets/person/2.jpeg"
-                alt=""
-                className="rightbarProfileImg"
-              />
-              <span className="rightbarOnline"></span>
-            </div>
-            <span className="rightbarUsername">tanaka</span>
-          </li>
+          {Users.map((user) => (
+            <Online user={user} key={user.id} />
+          ))}
         </ul>
         <p className="promotionTitle">プロモーション広告</p>
         <img

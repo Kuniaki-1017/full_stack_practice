@@ -1,8 +1,11 @@
 import React from "react";
 import "./Post.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+//dummyDataからデータを取得{}の中にdummyData内で
+//export const hogeの「hoge」にあたる文字を記述することで特定のオブジェクトを取得できる
 import { Users } from "../../dummyData/dummyData";
 
+//Timeline.jsxにてmap関数でpropで渡されてきたPostsデータをpropsで取得
 export default function Post({ post }) {
   // const user = Users.filter((user) => user.id === 1);
   // console.log(user[0].username);
@@ -13,6 +16,8 @@ export default function Post({ post }) {
           <div className="postTopLeft">
             <img
               src={
+                // 取得したUserデータの中からfilter関数（コールバックに引数を入れて処理内で条件を記述すると条件に合ったデータを取得できる）
+                //データ＋filter関数[フィルターされた結果で取り出したい配列（オブジェクト）番号指定]＋.キー名で取得できる
                 Users.filter((user) => user.id === post.id)[0].profilePicture
               }
               alt=""
