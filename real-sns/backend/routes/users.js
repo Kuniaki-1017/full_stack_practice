@@ -71,16 +71,35 @@ router.delete("/:id", async(req, res) => {
 });
 
 
-//ユーザー情報の取得
-router.get("/:id", async(req, res) => {
-    //req.params.id　→　リクエストパラメーターで送られてきた/:idの情報
-    //上記IDが一致、またはisAdimnがtrueならログインしている（本人）と証明されるため変更可能とする
+// //ユーザー情報の取得
+// router.get("/:id", async(req, res) => {
+//     //req.params.id　→　リクエストパラメーターで送られてきた/:idの情報
+//     //上記IDが一致、またはisAdimnがtrueならログインしている（本人）と証明されるため変更可能とする
+//         try {
+//             //上記if条件に合っていれば、//User（mongoose.Schemaで作ったインスタンス）のfindByIdById関数を使用して
+//             //ユーザ情報を見つけて取得する処理を実行する
+//             //どのユーザー情報を取得するか指定（で入力されたユーザーIDを指定）
+//             //データベースからリクエストパラメーターのIdと合致するドキュメントを取得※データベースと通信するためawait使用
+//             const user = await User.findById(req.params.id);
+//             //分割代入でpasswordとupdateAtの取り除いた情報を定義する。passwordとupdatedAt以外のプロパティは...otherにオブジェクトで代入される（otherオブジェクトが生成される）
+//             //user._doc → 取得したuser情報の全てのプロパティを取得
+//             const {password, updatedAt, ...other} = user._doc;
+//             return res.status(200).json(other);
+             
+//         } catch(err) {
+//             return res.status(500).json(err);
+//         }
+
+// });
+
+///クエリでユーザー情報の取得
+router.get("/", async(req, res) => {
+    const userId = req.query.userId;
+    const username = req.query.username;
         try {
-            //上記if条件に合っていれば、//User（mongoose.Schemaで作ったインスタンス）のfindByIdById関数を使用して
-            //ユーザ情報を見つけて取得する処理を実行する
-            //どのユーザー情報を取得するか指定（で入力されたユーザーIDを指定）
-            //データベースからリクエストパラメーターのIdと合致するドキュメントを取得※データベースと通信するためawait使用
-            const user = await User.findById(req.params.id);
+            const user = userId ? await User.fineById(userId) 
+            :await  User.findOne({username: username});
+
             //分割代入でpasswordとupdateAtの取り除いた情報を定義する。passwordとupdatedAt以外のプロパティは...otherにオブジェクトで代入される（otherオブジェクトが生成される）
             //user._doc → 取得したuser情報の全てのプロパティを取得
             const {password, updatedAt, ...other} = user._doc;
