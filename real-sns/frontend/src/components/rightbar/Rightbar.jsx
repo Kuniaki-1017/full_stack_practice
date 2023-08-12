@@ -5,7 +5,7 @@ import "./Rightbar.css";
 import { Users } from "../../dummyData/dummyData";
 import Online from "../online/Online";
 
-export default function Rightbar({ profile }) {
+export default function Rightbar({ user }) {
   // HOMEコンポーネント用のRightbarコンポーネントを関数で用意
   const HomeRightbar = () => {
     return (
@@ -110,7 +110,7 @@ export default function Rightbar({ profile }) {
       <div className="rightbarWrapper">
         {/* 三項演算子でpropsで渡されてきた値を元に呼び出すコンポーネントの切り分けをする */}
         {/* propsで渡されてきたprofileは「true」として渡ってきている */}
-        {profile ? <ProfileRightbar /> : <HomeRightbar />}
+        {user ? <ProfileRightbar /> : <HomeRightbar />}
       </div>
     </div>
   );

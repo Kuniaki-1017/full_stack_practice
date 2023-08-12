@@ -24,7 +24,7 @@ export default function Timeline({ username }) {
     };
     //うまくいかないときは一度ローカルサーバを再起動
     fetchPosts();
-  }, []);
+  }, [username]);
 
   return (
     <div className="timeline">

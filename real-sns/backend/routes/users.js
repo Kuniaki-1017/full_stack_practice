@@ -97,7 +97,7 @@ router.get("/", async(req, res) => {
     const userId = req.query.userId;
     const username = req.query.username;
         try {
-            const user = userId ? await User.fineById(userId) 
+            const user = userId ? await User.findById(userId) 
             :await  User.findOne({username: username});
 
             //分割代入でpasswordとupdateAtの取り除いた情報を定義する。passwordとupdatedAt以外のプロパティは...otherにオブジェクトで代入される（otherオブジェクトが生成される）
