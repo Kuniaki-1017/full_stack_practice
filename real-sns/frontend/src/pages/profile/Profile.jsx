@@ -36,12 +36,14 @@ export default function Profile() {
             <div className="profileCover">
               <img
                 className="profileCoverImg"
-                src={PUBLIC_FOLDER + "/post/3.jpeg"}
+                src={user.coverPictyre || PUBLIC_FOLDER + "/post/3.jpeg"}
                 alt=""
               />
               <img
                 className="profileUserUserImg"
-                src={PUBLIC_FOLDER + "/person/1.jpeg"}
+                src={
+                  user.profilePicture || PUBLIC_FOLDER + "/person/noAvatar.png"
+                }
                 alt=""
               />
             </div>
