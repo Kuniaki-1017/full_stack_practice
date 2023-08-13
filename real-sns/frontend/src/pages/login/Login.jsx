@@ -5,7 +5,6 @@ export default function Login() {
   //要素を監視できる関数userRefを使用。監視したいタグに今回で言うとref="email"と記述。
   const email = useRef();
   const password = useRef();
-  console.log(email);
 
   //form内のbuttonが押された時のイベントを定義
   const hendleSubmit = (e) => {
