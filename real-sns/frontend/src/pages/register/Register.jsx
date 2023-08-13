@@ -2,6 +2,7 @@ import React from "react";
 import "./Register.css";
 import { useRef } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 export default function Register() {
   const email = useRef();
@@ -9,13 +10,16 @@ export default function Register() {
   const passwordConfirmation = useRef();
   const username = useRef();
 
+  //useNavigateフックを使用
+  const navigate = useNavigate();
+
   //form内のbuttonが押された時のイベントを定義
   const hendleSubmit = async (e) => {
     e.preventDefault();
 
     //パスワードと確認用のパスワードがあっているか確認
     if (password.current.value !== passwordConfirmation.current.value) {
-      passwordConfirmation.current.setCustomValibity("パスワードが違います");
+      passwordConfirmation.current.setCustomValidity("パスワードが違います");
     } else {
       try {
         const user = {
@@ -25,6 +29,7 @@ export default function Register() {
         };
         //registerAPIを叩く
         await axios.post("/auth/register", user);
+        navigate("/login");
       } catch (err) {
         console.log(err);
       }
