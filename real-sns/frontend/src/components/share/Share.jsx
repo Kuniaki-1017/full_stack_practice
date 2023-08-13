@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Share.css";
 import ImageIcon from "@mui/icons-material/Image";
 import GifIcon from "@mui/icons-material/Gif";
 import FaceIcon from "@mui/icons-material/Face";
 import AnalyticsIcon from "@mui/icons-material/Analytics";
+import { AuthContext } from "../../state/AuthContext";
 
 export default function Shere() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const { user } = useContext(AuthContext);
   return (
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
           <img
-            src={PUBLIC_FOLDER + "/person/noAvatar.png"}
+            src={
+              user.profilePicture
+                ? PUBLIC_FOLDER + user.profilePicture
+                : PUBLIC_FOLDER + "/person/noAvatar.png"
+            }
             alt=""
             className="shareProfileImg"
           />
