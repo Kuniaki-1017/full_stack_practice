@@ -1,16 +1,34 @@
 import React from "react";
 import "./Register.css";
 import { useRef } from "react";
+import axios from "axios";
 
 export default function Register() {
   const email = useRef();
   const password = useRef();
   const passwordConfirmation = useRef();
-  const usrename = useRef();
+  const username = useRef();
 
   //form内のbuttonが押された時のイベントを定義
-  const hendleSubmit = (e) => {
+  const hendleSubmit = async (e) => {
     e.preventDefault();
+
+    //パスワードと確認用のパスワードがあっているか確認
+    if (password.current.value !== passwordConfirmation.current.value) {
+      passwordConfirmation.current.setCustomValibity("パスワードが違います");
+    } else {
+      try {
+        const user = {
+          username: username.current.value,
+          email: email.current.value,
+          password: password.current.value,
+        };
+        //registerAPIを叩く
+        await axios.post("/auth/register", user);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   };
   return (
     <div className="register">
@@ -27,7 +45,7 @@ export default function Register() {
               className="registerInput"
               placeholder="ユーザー名"
               required
-              ref={usrename}
+              ref={username}
             />
             <input
               type="email"
