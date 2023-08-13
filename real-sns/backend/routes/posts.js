@@ -6,13 +6,13 @@ const Post = require("../models/Post");
 const User = require("../models/User");
 
 //投稿を作成する
-router.post("/", async(req, res) => {
+router.post("/", async (req, res) => {
     //非同期でインスンス化（投稿の作成）
     //モデルからインスタンスを作成し、データを代入する
-     const newpost = await new Post(req.body);
+     const newPost = new Post(req.body);
      try {
         //データベースにreq.bodyの内容を保存
-        const savedPost = await newpost.save();
+        const savedPost = await newPost.save();
         return res.status(200).json(savedPost);
      } catch(err) {
         return res.status(500).json(err);
