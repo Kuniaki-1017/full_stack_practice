@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import "./Login.css";
 import { loginCall } from "../../actionColls";
 import { AuthContext } from "../../state/AuthContext";
@@ -23,6 +23,7 @@ export default function Login() {
       dispatch
     );
   };
+  // console.log(user);
   return (
     <div className="login">
       <div className="loginWrapper">
