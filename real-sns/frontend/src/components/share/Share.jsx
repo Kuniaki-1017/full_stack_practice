@@ -22,6 +22,27 @@ export default function Shere() {
       desc: desc.current.value,
     };
 
+    if (file) {
+      //new FormData：Web サイト上のフォームの内容を簡単にキャプチャできます。
+      //キャプチャした内容はキー・バリューのペアとして (要はディクショナリとして) 利用することができます。
+      //FormData のコンストラクタに、form 要素の DOM オブジェクトを渡すと自動的にフォームの内容を取り込みます。
+      const data = new FormData();
+      //重複の可能性があるデータのため現在時刻を足して保存
+      const fileName = Date.now() + file.name;
+      //FormData オブジェクトの set() メソッドや append() メソッドを使うと、
+      //FormData オブジェクトに新しいキーと値をセットできます。
+      data.append("name", fileName);
+      data.append("file", file);
+      newPost.img = fileName;
+
+      try {
+        //画像アップロードAPIを叩く
+        await axios.post("/upload", data);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     try {
       await axios.post("/posts", newPost);
       window.location.reload();
