@@ -85,6 +85,8 @@
 }
 
 .registerRegisterButton{
+    margin: 0 auto;
+    display: block;
     width: 60%;
     height: 50px;
     border-radius: 10px;
@@ -95,4 +97,8 @@
     font-weight: 500;
     cursor: pointer;
     align-self: center;
+    text-decoration: none;
+}
+.link{
+    text-decoration: none;
 }

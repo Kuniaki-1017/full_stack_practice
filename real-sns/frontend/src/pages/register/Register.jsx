@@ -3,6 +3,7 @@ import "./Register.css";
 import { useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const email = useRef();
@@ -78,7 +79,9 @@ export default function Register() {
             <button className="registerButton" type="submit">
               サインアップ
             </button>
-            <button className="registerRegisterButton">ログイン</button>
+            <Link to="/login" className="link">
+              <button className="registerRegisterButton">ログイン</button>
+            </Link>
           </form>
         </div>
       </div>

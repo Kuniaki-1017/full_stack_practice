@@ -1,28 +1,20 @@
 //グローバルコンテキストを作成できるライブラリをインポート
-import {createContext, useReducer} from "react";
+import {createContext, useEffect, useReducer} from "react";
 //別ファイルで定期したAuthReducerをインポート
 import AuthReducer from "./AuthReducer";
 
 //最初のユーザー状態を定義
 const initialState = {
-    // user: null,
-    user:{
-        _id: "64cf11379925232524853c9d",
-        username: "kuniaki",
-        email: "kuniaki@gmail.com,",
-        password: "kuniaki0504",
-        profilePicture: "/person/1.jpeg",
-        coverPicture: "",
-        followers: [],
-        followings: [],
-        isAdmin :false,
-    },
+    //ローカルストレージにユーザー情報があればログイン状態
+    //なければログインしていない切り分けをおこなう
+    user: JSON.parse(localStorage.getItem("user")) ||  null,
     isFetching: false,
     error: false,
 };
 //状態をグローバルに管理する
 //createContext関数でinitialStateをグローバルコンテキストとして定義
 export const AuthContext = createContext(initialState);
+
 
 
 //認証の状態をどこからでも提供できる関数を定義
@@ -33,6 +25,12 @@ export const AuthContextProvider = ({children}) => {
 //dispatchはactionを実行する関数と思って良い
     const [state, dispatch] = useReducer(AuthReducer, initialState);
 
+    useEffect(() => {
+        //ローカルストレージにユーザーの状態を保存
+        localStorage.setItem("user", JSON.stringify(state.user));
+    
+    }, [state.user]);
+    
 
     return (
         // createContextを使用することでProvider修飾子を使えるタグ→どこにでも提供できる
