@@ -23,7 +23,18 @@ export default function Timeline({ username }) {
         ? await axios.get(`/posts/profile/${username}`) //プロフィールの場合
         : await axios.get(`/posts/timeline/${user._id}`); //ホームの場合
       //responseのdataをオブジェクトを取得
-      setPosts(response.data);
+      //sort関数でソートを行う関連記事：https://dezanari.com/js-sort/
+      setPosts(
+        //引数post1には配列のうちの1つの要素、bには次の要素が入ります。
+        //そしてsort関数は戻り値が0未満なら順番は変わらない、
+        //0より大きいなら順番を入れ替えるという処理をします。
+        //大きい数字は次も比較されてどんどん後ろに下がる？最終的に一番最後になる？
+        //下記は数字が大き方が前にくる処理？数字が大きい→時間が経過している
+        response.data.sort((post1, post2) => {
+          //post1と2を逆にすると逆ソートされる
+          return new Date(post2.createdAt) - new Date(post1.createdAt);
+        })
+      );
     };
     //うまくいかないときは一度ローカルサーバを再起動
     fetchPosts();
