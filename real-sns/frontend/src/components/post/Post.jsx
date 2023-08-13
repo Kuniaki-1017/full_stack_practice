@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Post.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import axios from "axios";
@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 //dummyDataからデータを取得{}の中にdummyData内で
 //export const hogeの「hoge」にあたる文字を記述することで特定のオブジェクトを取得できる
 // import { Users } from "../../dummyData/dummyData";
+import { AuthContext } from "../../state/AuthContext";
 
 //Timeline.jsxにてmap関数でpropで渡されてきたPostsデータをpropsで取得
 export default function Post({ post }) {
@@ -16,9 +17,17 @@ export default function Post({ post }) {
   const [like, setLike] = useState(post.likes.length);
   //いいねが押されているか判別する状態関数
   const [isLiked, setIsLiked] = useState(false);
-
+  const { user: currentUser } = useContext(AuthContext);
   //いいねが押された時のクリックイベント
-  const handleLike = () => {
+  const handleLike = async () => {
+    try {
+      //いいねのAPIを叩いていく
+      //PUTなので第一引数にエンドポイント、第二引数にデータを渡す
+      await axios.put(`posts/${post._id}/like`, { userId: currentUser._id });
+    } catch (err) {
+      console.log(err);
+    }
+
     //isLikedが押されていたらいいねを-1し、押されていなかったら+1する。（押してるか押してないかはisLikedに入ってる）
     setLike(isLiked ? like - 1 : like + 1);
     //いいね押されたらbool値を反転させる
