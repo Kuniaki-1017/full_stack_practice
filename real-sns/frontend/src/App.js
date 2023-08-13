@@ -3,18 +3,21 @@ import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 //ルーティング設定をおこなえるライブラリをインポート（インストールはnpm run react-router-dom）
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { AuthContext } from "./state/AuthContext";
+import { useContext} from "react";
 
 
 function App() {
+  const {user} = useContext(AuthContext);
   return (
     //下記のようにRouter直下にRoutesを配置しその直下にRouteを設置
     //Routeの属性のpathにパスを設定。elementに表示したいコンポーネントを設定することでルーティングできる。
     <Router>
       <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
+        <Route path="/" element={user ? <Home/> : <Register/>}/>
+        <Route path="/login" element={user ?  <Navigate to="/" /> : <Login/>}/>
+        <Route path="/register" element={user ? <Navigate to="/" /> : <Register/>}/>
         <Route path="/profile/:username" element={<Profile/>}/>
       </Routes>
     </Router>
