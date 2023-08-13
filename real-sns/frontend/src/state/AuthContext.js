@@ -15,7 +15,21 @@ const initialState = {
 export const AuthContext = createContext(initialState);
 
 //認証の状態をどこからでも提供できる関数を定義
-export const AuthContextProvider = () => {
-
-    const [state, dipatch] = useReducer(AuthReducer, initialState);
+export const AuthContextProvider = ({children}) => {
+//useReducer関数を使用して状態管理を行う。第一引数に新しい状態にする関数、第二引数に初期値の状態を渡す
+//stateには今の状態が常に入り、dixpatchにはどういうactionを実行したか
+    const [state, dispatch] = useReducer(AuthReducer, initialState);
+    return (
+        // createContextを使用することで使えるタグ→どこにでも提供できる
+        <AuthContext.Provider value={{
+            user:state.user,
+            isFetching: state.isFetching,
+            error: state.error,
+            dispatch,
+             
+        }}>
+            {/* 今回で言うとapp.jsをchildlenに入れる */}
+            {children}
+        </AuthContext.Provider>
+    )
 }
