@@ -1,3 +1,4 @@
+// AuthReducerにてAuthActionの値に応じた条件分岐をswitch文で実装。
 const AuthReducer = (state, action) => {
     switch(action.type){
         case "LOGIN_START":
@@ -18,5 +19,9 @@ const AuthReducer = (state, action) => {
                 isFetching: false,
                 error: action.payload,
             };
+        default: 
+        return state;
     }
 };
+
+export default AuthReducer;
