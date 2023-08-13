@@ -6,10 +6,12 @@ const multer = require("multer");
 
 // multerのdiskStorageを定義  
 const storage = multer.diskStorage({
+    //どこに保存するか（public/images）
     destination: (req, file, cd) => {
         cd(null, "public/images");
     },
-    filename: (req, res, cd) => {
+    // ファイル名
+    filename: (req, file, cd) => {
         cd(null, file.originalname);
     },
 });
