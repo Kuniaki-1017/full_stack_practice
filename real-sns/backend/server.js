@@ -1,6 +1,7 @@
 //expressをインストール：ローカルサーバ等を扱える
 const express = require("express");
 const app = express();
+const path = require("path");
 
 //dotenvを読み込みコンフィグ関数を使用する(envファイルの変数が使用できるようになる)
 //第三者にパスワードを見れないようにし、gitignoreでgitリポジトリに上げないようにする。
@@ -45,6 +46,8 @@ app.use("/api/auth", authRoute);
 app.use("/api/posts", postsRoute);
 app.use("/api/upload", uploadRoute);
 
+//useの/imgesを見に行った時、静的なファイルに関しては現在のディレクトリ（__dirname）+public/imgesを見に行って下さいという記述
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 
 

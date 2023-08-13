@@ -14,8 +14,6 @@ export default function Shere() {
 
   const [file, setFile] = useState(null);
 
-  console.log(file);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
