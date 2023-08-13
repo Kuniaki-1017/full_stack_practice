@@ -18,6 +18,8 @@ export const AuthContext = createContext(initialState);
 export const AuthContextProvider = ({children}) => {
 //useReducer関数を使用して状態管理を行う。第一引数に新しい状態にする関数、第二引数に初期値の状態を渡す
 //stateには現在の状態が常に入り、dixpatchにはどういうactionを実行したか？するか？
+//useReducerはuseStateと非常に似ている
+//dispatchはactionを実行する関数と思って良い
     const [state, dispatch] = useReducer(AuthReducer, initialState);
 
 

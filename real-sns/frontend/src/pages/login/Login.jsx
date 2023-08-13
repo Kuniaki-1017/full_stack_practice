@@ -1,16 +1,27 @@
 import React, { useRef } from "react";
 import "./Login.css";
+import { loginCall } from "../../actionColls";
+import { AuthContext } from "../../state/AuthContext";
 
 export default function Login() {
   //要素を監視できる関数userRefを使用。監視したいタグに今回で言うとref="email"と記述。
   const email = useRef();
   const password = useRef();
+  //useContextというフックを使用しAuthContextを使用できるようにする
+  const { user, isFetching, error, dispatch } = useContext(AuthContext);
 
   //form内のbuttonが押された時のイベントを定義
   const hendleSubmit = (e) => {
     e.preventDefault();
-    console.log(email.current.value);
-    console.log(password.current.value);
+    // console.log(email.current.value);
+    // console.log(password.current.value);
+    loginCall(
+      {
+        email: email.current.value,
+        password: password.current.value,
+      },
+      dispatch
+    );
   };
   return (
     <div className="login">
