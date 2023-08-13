@@ -32,6 +32,7 @@ const PORT = 5000;
 const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postsRoute = require("./routes/posts");
+const uploadRoute = require("./routes/upload");
 
 //サーバの起動関数を使用
 app.listen(PORT, () => console.log("サーバーが起動しました"));
@@ -42,6 +43,7 @@ app.use(express.json());
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/posts", postsRoute);
+app.use("/api/upload", uploadRoute);
 
 
 
